@@ -8,6 +8,13 @@ sudo apt install -y git docker.io docker-compose-plugin
 sudo systemctl enable --now docker
 ```
 
+If `docker-compose-plugin` is unavailable on your VPS image, install the classic compose package:
+
+```bash
+sudo apt install -y git docker.io docker-compose
+sudo systemctl enable --now docker
+```
+
 ```bash
 git clone https://github.com/lolerkop/tren.git fitness-rpg-bot
 cd fitness-rpg-bot
@@ -32,8 +39,8 @@ AI_TIMEOUT_SECONDS=35
 Start:
 
 ```bash
-docker compose up -d --build
-docker compose logs -f --tail=100
+docker compose up -d --build || docker-compose up -d --build
+docker compose logs -f --tail=100 || docker-compose logs -f --tail=100
 ```
 
 ## Update Bot
@@ -47,7 +54,7 @@ Equivalent manual update:
 
 ```bash
 git pull --ff-only
-docker compose up -d --build
+docker compose up -d --build || docker-compose up -d --build
 ```
 
 ## Backup
@@ -62,8 +69,8 @@ cp data/fitness_rpg.sqlite3 "backups/fitness_rpg_$(date +%F_%H-%M).sqlite3"
 ## Useful Commands
 
 ```bash
-docker compose ps
-docker compose logs -f --tail=100
-docker compose restart
-docker compose down
+docker compose ps || docker-compose ps
+docker compose logs -f --tail=100 || docker-compose logs -f --tail=100
+docker compose restart || docker-compose restart
+docker compose down || docker-compose down
 ```
